@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/userForms.scss";
 const Card = ({ children }: any) => {
   return (
