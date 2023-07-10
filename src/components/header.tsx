@@ -11,19 +11,15 @@ const Header = () => {
       <div className="menu">
         <Sidebar visible={visible} onHide={() => setVisible(false)}>
           <div className="buttons">
-            <div className="first">
-              <Link to={"/company"}>
-                <Button className="menu-item p-button-text">Empresa</Button>
-              </Link>
-              <Link slot="end" to={"/login"}>
-                <Button className="menu-item p-button-text">Passar</Button>
-              </Link>
-            </div>
-            <div>
-              <Link slot="end" to={"/login"}>
-                <Button className="menu-item p-button-text">Passar</Button>
-              </Link>
-            </div>
+            <Link to={"/company"}>
+              <Button className="menu-item p-button-text">Empresa</Button>
+            </Link>
+            <Link slot="end" to={"/login"}>
+              <Button className="menu-item p-button-text">Passar</Button>
+            </Link>
+            <Link slot="end" to={"/login"}>
+              <Button className="menu-item p-button-text">Passar</Button>
+            </Link>
           </div>
         </Sidebar>
         <Button
