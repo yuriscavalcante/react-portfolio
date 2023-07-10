@@ -65,9 +65,33 @@ export default class MockedData {
         phone: "1692843-2855",
         email: "emailteste8@email.com",
       },
+      {
+        id: 9,
+        company_name: "Silva e Pelaquim Associados LTDA 9",
+        acronym: "SPA9",
+        cnpj: "98781948000126",
+        phone: "1692843-2855",
+        email: "emailteste9@email.com",
+      },
+      {
+        id: 10,
+        company_name: "Silva e Pelaquim Associados LTDA 10",
+        acronym: "SPA10",
+        cnpj: "98781948000126",
+        phone: "1692843-2855",
+        email: "emailteste10@email.com",
+      },
+      {
+        id: 11,
+        company_name: "Silva e Pelaquim Associados LTDA 11",
+        acronym: "SPA11",
+        cnpj: "98781948000126",
+        phone: "1692843-2855",
+        email: "emailteste11@email.com",
+      },
     ];
     return {
-      companies: companies.slice(query.first, query.first + 5),
+      companies: companies.slice(query.first, query.first + 10),
       total: companies.length,
     };
   }

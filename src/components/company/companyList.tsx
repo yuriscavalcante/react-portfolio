@@ -1,8 +1,8 @@
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { useEffect, useState } from "react";
-import MockedData from "../../../service/mockedData";
-import "../../../styles/company/list.scss";
+import MockedData from "../../service/mockedData";
+import "../../styles/company/list.scss";
 
 const CompanyList = () => {
   const [loading, setLoading] = useState(false);
@@ -10,7 +10,7 @@ const CompanyList = () => {
   const [lazyParams, setLazyParams] = useState({
     first: 0,
     page: 1,
-    rows: 5,
+    rows: 10,
     sortField: null,
     sortOrder: null,
   });
@@ -20,7 +20,7 @@ const CompanyList = () => {
   const companiesService = new MockedData();
   useEffect(() => {
     loadLazy();
-  }, []);
+  }, [lazyParams]);
 
   const loadLazy = () => {
     setLoading(true);
@@ -33,15 +33,7 @@ const CompanyList = () => {
   };
 
   const onPage = (event: any) => {
-    setLoading(true);
     setLazyParams(event);
-
-    loadLazyTimeout = setTimeout(() => {
-      const getcompanies = companiesService.getCompanies(lazyParams);
-      setCompanies(getcompanies.companies);
-      setTotal(getcompanies.total);
-      setLoading(false);
-    }, Math.random() * 1000 + 250);
   };
   return (
     <div className="list">
@@ -51,7 +43,7 @@ const CompanyList = () => {
         dataKey="id"
         paginator
         first={lazyParams.first}
-        rows={5}
+        rows={10}
         totalRecords={total}
         onPage={onPage}
         loading={loading}
