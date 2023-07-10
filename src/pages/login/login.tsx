@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Card from "../../components/card";
 import * as yup from "yup";
 import { useFormik } from "formik";
@@ -6,8 +5,6 @@ import "../../styles/userForms.scss";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  const [isRegister, setIsRegister] = useState(false);
-
   const formikLogin = useFormik({
     initialValues: {
       email: "",
@@ -17,8 +14,9 @@ const Login = () => {
       email: yup.string().email().required("Campo requerido"),
       password: yup.string().min(8).required("Campo requerido"),
     }),
-    onSubmit: (values: any) => {
+    onSubmit: (values: any, { resetForm }) => {
       console.log(values);
+      resetForm({ values: "" });
       alert(JSON.stringify(values, null, 2));
     },
   });
