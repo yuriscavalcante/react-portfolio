@@ -12,9 +12,13 @@
     align-items: center;
     padding: 15px;
     width: 30vw;
-    height: 70vh;
+    height: 50vh;
     background: #ffff;
     border-radius: 10px;
+    .btn-info {
+      width: 25vw;
+      color: white;
+    }
     label {
       a {
         cursor: pointer;

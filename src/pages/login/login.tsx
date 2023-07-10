@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Card from "../../components/card";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import "../../styles/userForms.scss";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [isRegister, setIsRegister] = useState(false);
@@ -66,9 +68,11 @@ const Login = () => {
             ) : null}
           </li>
         </ul>
-        <button type="submit" className="btn btn-info">
-          Entrar
-        </button>
+        <Link to={"/home"}>
+          <button type="submit" className="btn btn-info">
+            Entrar
+          </button>
+        </Link>
       </form>
     </Card>
   );
