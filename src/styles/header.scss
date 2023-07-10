@@ -1,0 +1,34 @@
+.menu {
+  display: flex;
+  justify-content: left;
+  width: 100vw;
+  height: 5vh;
+  font-size: large;
+  padding: 10px;
+  .navbar {
+    padding: 10px;
+    .nav-item {
+      .router:hover {
+        color: #0dcaf0;
+      }
+      .router {
+        color: #0dcaf0;
+      }
+      .danger:hover {
+        color: red;
+        padding-right: 10px;
+      }
+      .danger {
+        color: red;
+        padding-right: 10px;
+      }
+    }
+  }
+}
+.p-sidebar-content {
+  padding: 0;
+}
+.p-button {
+  font-size: large;
+  width: 32vw;
+}

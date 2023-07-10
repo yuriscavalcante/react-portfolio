@@ -1,0 +1,13 @@
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 80vh;
+  .p-datatable {
+    width: 85vw;
+    .p-datatable-wrapper {
+      max-height: 60vh;
+    }
+  }
+}
