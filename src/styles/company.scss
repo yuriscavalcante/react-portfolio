@@ -2,4 +2,16 @@
   width: 100vw;
   height: 95vh;
   background: #3d6870;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: end;
+  padding: 15px;
+  .newCompany {
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    width: 15vw;
+  }
 }

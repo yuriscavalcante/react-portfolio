@@ -95,4 +95,37 @@ export default class MockedData {
       total: companies.length,
     };
   }
+
+  getRoles(query: any) {
+    const roles = [
+      {
+        id: 1,
+        company: 1,
+        name: "Admin",
+        description: "Cargo de administrador",
+      },
+      {
+        id: 2,
+        company: 2,
+        name: "RH",
+        description: "Cargo de RH",
+      },
+      {
+        id: 3,
+        company: 1,
+        name: "RH",
+        description: "Cargo de RH",
+      },
+      {
+        id: 4,
+        company: 1,
+        name: "TI",
+        description: "Cargo de TI",
+      },
+    ];
+
+    return roles.filter((res) => {
+      return res.company === query.company;
+    });
+  }
 }

@@ -1,4 +1,3 @@
-import "../styles/userForms.scss";
 const Card = ({ children }: any) => {
   return (
     <div className="container text-center">

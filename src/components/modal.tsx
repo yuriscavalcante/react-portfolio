@@ -1,13 +1,17 @@
 import { Dialog } from "primereact/dialog";
-
-const Modal = ({ children, displayBasic }: any) => {
+import { useEffect, useState } from "react";
+import "../styles/modalForm.scss";
+const Modal = ({ children, handleChange, displayBasic, method }: any) => {
+  const [display, setDisplay] = useState(false);
+  useEffect(() => {
+    setDisplay(displayBasic);
+  }, [displayBasic]);
   return (
     <Dialog
-      header="Header"
-      visible={displayBasic}
-      style={{ width: "50vw" }}
+      header={method}
+      visible={display}
       onHide={() => {
-        displayBasic = false;
+        handleChange(false);
       }}
     >
       {children}
