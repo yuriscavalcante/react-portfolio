@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "../../components/modal";
 import Header from "../../components/header";
 import CompanyList from "../../components/company/companyList";
@@ -27,8 +27,9 @@ const Company = () => {
       phone: yup.string().required("Campo requerido"),
       email: yup.string().email().required("Campo requerido"),
     }),
-    onSubmit: (values: any) => {
+    onSubmit: (values: any, { resetForm }) => {
       console.log(values);
+      resetForm({ values: "" });
       alert(JSON.stringify(values, null, 2));
     },
   });
