@@ -8,6 +8,7 @@ import { InputText } from "primereact/inputtext";
 import { InputMask } from "primereact/inputmask";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import LoadingButton from "../../components/loadingButton";
 
 const Company = () => {
   const [displayBasic, setDisplayBasic] = useState(false);
@@ -22,7 +23,7 @@ const Company = () => {
     },
     validationSchema: yup.object({
       name: yup.string().required("Campo requerido"),
-      acronym: yup.string().required("Campo requerido"),
+      acronym: yup.string(),
       cnpj: yup.string().required("Campo requerido"),
       phone: yup.string().required("Campo requerido"),
       email: yup.string().email().required("Campo requerido"),
@@ -92,11 +93,6 @@ const Company = () => {
                   <label htmlFor="acronym">Sigla</label>
                 </span>
               </div>
-              {formikCompany.touched.acronym && formikCompany.errors.acronym ? (
-                <div>
-                  <a>{String(formikCompany.errors.acronym)}</a>
-                </div>
-              ) : null}
               <div className="field col-12 ">
                 <span className="p-float-label">
                   <InputMask
@@ -109,12 +105,12 @@ const Company = () => {
                   <label htmlFor="cnpj">CNPJ</label>
                 </span>
               </div>
+              {formikCompany.touched.cnpj && formikCompany.errors.cnpj ? (
+                <div>
+                  <a>{String(formikCompany.errors.cnpj)}</a>
+                </div>
+              ) : null}
             </div>
-            {formikCompany.touched.cnpj && formikCompany.errors.cnpj ? (
-              <div>
-                <a>{String(formikCompany.errors.cnpj)}</a>
-              </div>
-            ) : null}
             <div className="row">
               <div className="field col-12 ">
                 <span className="p-float-label">
@@ -152,14 +148,11 @@ const Company = () => {
               ) : null}
             </div>
           </form>
-          <Button
-            form="createForm"
-            type="submit"
-            className="newCompany"
-            severity="success"
-          >
-            Salvar
-          </Button>
+          <LoadingButton
+            label={"Salvar"}
+            severity={"success"}
+            form={"createForm"}
+          />
         </div>
       </Modal>
     </>
