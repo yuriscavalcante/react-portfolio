@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Modal from "../../components/modal";
 import Header from "../../components/header";
 import CompanyList from "./components/companyList";
@@ -9,10 +9,14 @@ import { InputMask } from "primereact/inputmask";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import LoadingButton from "../../components/loadingButton";
+import { Toast } from "primereact/toast";
+import api from "../../config/api";
 
 const Company = () => {
   const [displayBasic, setDisplayBasic] = useState(false);
-
+  const [loading, setLoading] = useState(false);
+  const [reload, setReload] = useState(false);
+  const toast: any = useRef(null);
   const formikCompany = useFormik({
     initialValues: {
       name: "",
@@ -28,10 +32,35 @@ const Company = () => {
       phone: yup.string().required("Campo requerido"),
       email: yup.string().email().required("Campo requerido"),
     }),
-    onSubmit: (values: any, { resetForm }) => {
-      console.log(values);
-      resetForm({ values: "" });
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values: any, { resetForm }) => {
+      setLoading(true);
+      try {
+        setReload(true);
+        await api
+          .post("/company", {
+            name: values.name,
+            acronym: values.acronym,
+            cnpj: values.cnpj,
+            phoneNumber: values.phone,
+            email: values.email,
+          })
+          .then((response: any) => {
+            return toast.current.show({
+              severity: "success",
+              detail: response.data.message,
+            });
+          });
+        resetForm({ values: "" });
+        setLoading(false);
+        setReload(false);
+        setDisplayBasic(false);
+      } catch (err: any) {
+        setLoading(false);
+        return toast.current.show({
+          severity: "error",
+          detail: err.response.data.message,
+        });
+      }
     },
   });
 
@@ -42,6 +71,7 @@ const Company = () => {
   return (
     <>
       <Header></Header>
+      <Toast ref={toast} position="top-left" />
       <div className="body">
         <Button
           className="newCompany"
@@ -52,7 +82,7 @@ const Company = () => {
         >
           Adicionar
         </Button>
-        <CompanyList></CompanyList>
+        <CompanyList reload={reload}></CompanyList>
       </div>
       <Modal
         handleChange={handleChange}
@@ -149,6 +179,7 @@ const Company = () => {
             </div>
           </form>
           <LoadingButton
+            loading={loading}
             label={"Salvar"}
             severity={"success"}
             form={"createForm"}
