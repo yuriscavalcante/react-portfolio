@@ -1,12 +1,14 @@
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MockedData from "../../../service/mockedData";
 import "../../../styles/company/list.scss";
+import api from "../../../config/api";
 
-const CompanyList = () => {
+const CompanyList = ({ reload }: any) => {
   const [loading, setLoading] = useState(false);
   const [companies, setCompanies] = useState([{}]);
+  const toast: any = useRef(null);
   const [lazyParams, setLazyParams] = useState({
     first: 0,
     page: 1,
@@ -15,21 +17,24 @@ const CompanyList = () => {
     sortOrder: null,
   });
   const [total, setTotal] = useState(0);
-  let loadLazyTimeout = null;
-
-  const companiesService = new MockedData();
   useEffect(() => {
     loadLazy();
-  }, [lazyParams]);
+  }, [reload]);
 
-  const loadLazy = () => {
+  const loadLazy = async () => {
     setLoading(true);
-    loadLazyTimeout = setTimeout(() => {
-      const getcompanies = companiesService.getCompanies(lazyParams);
-      setCompanies(getcompanies.companies);
-      setTotal(getcompanies.total);
+    try {
+      await api.get("/company").then((response: any) => {
+        setCompanies(response.data.company);
+      });
       setLoading(false);
-    }, Math.random() * 1000 + 250);
+    } catch (err: any) {
+      setLoading(false);
+      return toast.current.show({
+        severity: "error",
+        detail: err.response.data.message,
+      });
+    }
   };
 
   const onPage = (event: any) => {
@@ -48,10 +53,10 @@ const CompanyList = () => {
         onPage={onPage}
         loading={loading}
       >
-        <Column field="company_name" header="Nome"></Column>
+        <Column field="name" header="Nome"></Column>
         <Column field="acronym" header="Sigla"></Column>
         <Column field="cnpj" header="cnpj"></Column>
-        <Column field="phone" header="Telefone"></Column>
+        <Column field="phoneNumber" header="Telefone"></Column>
         <Column field="email" header="E-mail"></Column>
       </DataTable>
     </div>
