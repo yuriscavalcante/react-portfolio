@@ -5,16 +5,24 @@
   height: 5vh;
   font-size: large;
   padding: 10px;
+  background: #2b5a63;
 }
-.p-sidebar-content {
-  padding: 0;
-  display: flex;
-  a {
-    .p-button {
-      align-items: start;
-      justify-content: start;
-      font-size: large;
-      width: 19vw;
+.p-sidebar-mask {
+  .p-sidebar {
+    background: #2b5a63;
+    .p-sidebar-content {
+      padding: 0;
+      display: flex;
+      overflow: hidden;
+      a {
+        .p-button {
+          color: white;
+          align-items: start;
+          justify-content: start;
+          font-size: large;
+          min-width: 25vw;
+        }
+      }
     }
   }
 }

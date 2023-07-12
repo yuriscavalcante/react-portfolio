@@ -1,8 +1,8 @@
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { useEffect, useState } from "react";
-import MockedData from "../../service/mockedData";
-import "../../styles/company/list.scss";
+import MockedData from "../../../service/mockedData";
+import "../../../styles/company/list.scss";
 
 const CompanyList = () => {
   const [loading, setLoading] = useState(false);
