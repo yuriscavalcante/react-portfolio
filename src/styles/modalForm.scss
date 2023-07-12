@@ -1,18 +1,30 @@
-.teste {
-  display: flex;
-  width: 75vw;
-  height: 50vh;
-  flex-direction: column;
-  align-items: center;
-  .form {
-    display: flex;
-    align-items: center;
-    padding: 25px;
-    gap: 35px;
-    .row {
-      gap: 25px;
-      .p-component {
-        width: 30vw;
+.p-dialog-mask {
+  .p-dialog {
+    .p-dialog-header {
+      color: white;
+      background: #2b5a63;
+    }
+    .p-dialog-content {
+      color: white;
+      background: #2b5a63;
+      .teste {
+        display: flex;
+        width: 75vw;
+        height: 50vh;
+        flex-direction: column;
+        align-items: center;
+        .form {
+          display: flex;
+          align-items: center;
+          padding: 25px;
+          gap: 35px;
+          .row {
+            gap: 25px;
+            .p-component {
+              width: 30vw;
+            }
+          }
+        }
       }
     }
   }
