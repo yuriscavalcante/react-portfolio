@@ -4,10 +4,12 @@ import { useFormik } from "formik";
 import "../../styles/userForms.scss";
 import { useNavigate } from "react-router-dom";
 import api from "../../config/api";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import LoadingButton from "../../components/loadingButton";
+import { Toast } from "primereact/toast";
 
 const Login = () => {
+  const toast: any = useRef(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const formikLogin = useFormik({
@@ -21,17 +23,26 @@ const Login = () => {
     }),
     onSubmit: async (values: any, { resetForm }) => {
       setLoading(true);
-      await api
-        .post("/user/login", {
-          email: values.email,
-          password: values.password,
-        })
-        .then((response: any) => {
-          console.log(response);
+      try {
+        await api
+          .post("/user/login", {
+            email: values.email,
+            password: values.password,
+          })
+          .then((response: any) => {
+            sessionStorage.setItem("user", JSON.stringify(response.data.user));
+          });
+        resetForm({ values: "" });
+        setLoading(false);
+        navigate("/home");
+      } catch (err: any) {
+        console.log(err);
+        setLoading(false);
+        return toast.current.show({
+          severity: "error",
+          detail: err.response.data.message,
         });
-      resetForm({ values: "" });
-      setLoading(false);
-      navigate("/home");
+      }
     },
   });
 
@@ -82,6 +93,7 @@ const Login = () => {
         </ul>
         <LoadingButton loading={loading} label={"Entrar"} />
       </form>
+      <Toast ref={toast} position="top-left" />
     </Card>
   );
 };
