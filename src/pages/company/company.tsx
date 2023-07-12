@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "../../components/modal";
 import Header from "../../components/header";
-import CompanyList from "../../components/company/companyList";
+import CompanyList from "./components/companyList";
 import { Button } from "primereact/button";
 import "../../styles/company.scss";
 import { InputText } from "primereact/inputtext";
