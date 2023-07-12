@@ -6,14 +6,18 @@ import { Button } from "primereact/button";
 
 const Header = () => {
   const [visible, setVisible] = useState(false);
+  const user = JSON.parse(String(sessionStorage.getItem("user")));
+
   return (
     <>
       <div className="menu">
         <Sidebar visible={visible} onHide={() => setVisible(false)}>
           <div className="buttons">
-            <Link to={"/company"}>
-              <Button className="menu-item p-button-text">Empresa</Button>
-            </Link>
+            {user.user.isAdmin ? (
+              <Link to={"/company"}>
+                <Button className="menu-item p-button-text">Empresa</Button>
+              </Link>
+            ) : null}
             <Link slot="end" to={"/login"}>
               <Button className="menu-item p-button-text">Passar</Button>
             </Link>
