@@ -2,9 +2,14 @@ import Card from "../../components/card";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import "../../styles/userForms.scss";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import api from "../../config/api";
+import { useState } from "react";
+import LoadingButton from "../../components/loadingButton";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const formikLogin = useFormik({
     initialValues: {
       email: "",
@@ -14,10 +19,19 @@ const Login = () => {
       email: yup.string().email().required("Campo requerido"),
       password: yup.string().min(8).required("Campo requerido"),
     }),
-    onSubmit: (values: any, { resetForm }) => {
-      console.log(values);
+    onSubmit: async (values: any, { resetForm }) => {
+      setLoading(true);
+      await api
+        .post("/user/login", {
+          email: values.email,
+          password: values.password,
+        })
+        .then((response: any) => {
+          console.log(response);
+        });
       resetForm({ values: "" });
-      alert(JSON.stringify(values, null, 2));
+      setLoading(false);
+      navigate("/home");
     },
   });
 
@@ -66,11 +80,7 @@ const Login = () => {
             ) : null}
           </li>
         </ul>
-        <Link to={"/home"}>
-          <button type="submit" className="btn btn-info">
-            Entrar
-          </button>
-        </Link>
+        <LoadingButton loading={loading} label={"Entrar"} />
       </form>
     </Card>
   );
