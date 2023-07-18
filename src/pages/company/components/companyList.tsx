@@ -18,15 +18,18 @@ const CompanyList = ({ reload }: any) => {
   });
   const [total, setTotal] = useState(0);
   useEffect(() => {
-    loadLazy();
-  }, [reload]);
+    loadLazy(lazyParams);
+  }, [reload, lazyParams]);
 
-  const loadLazy = async () => {
+  const loadLazy = async (params: any) => {
     setLoading(true);
     try {
-      await api.get("/company").then((response: any) => {
-        setCompanies(response.data.company);
-      });
+      await api
+        .get(`/company?skip=${lazyParams.first}`)
+        .then((response: any) => {
+          setCompanies(response.data.list);
+          setTotal(response.data.total);
+        });
       setLoading(false);
     } catch (err: any) {
       setLoading(false);
@@ -38,6 +41,7 @@ const CompanyList = ({ reload }: any) => {
   };
 
   const onPage = (event: any) => {
+    console.log(event);
     setLazyParams(event);
   };
   return (
