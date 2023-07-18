@@ -2,7 +2,7 @@ import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { useEffect, useRef, useState } from "react";
 import MockedData from "../../../service/mockedData";
-import "../../../styles/company/list.scss";
+import "../styles/list.scss";
 import api from "../../../config/api";
 
 const CompanyList = ({ reload }: any) => {

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/login/login";
 import Home from "./pages/home/home";
 import Company from "./pages/company/company";
+import "./styles/buttons.scss";
 
 function App() {
   return (

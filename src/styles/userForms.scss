@@ -4,7 +4,7 @@
   align-items: center;
   min-width: 100vw;
   height: 100vh;
-  background: #3d6870;
+  background: #9ba4b5;
   .forms {
     gap: 15px;
     display: flex;
@@ -16,6 +16,7 @@
     background: #ffff;
     border-radius: 10px;
     .btn-info {
+      background: #9ba4b5;
       width: 25vw;
       color: white;
     }

@@ -3,7 +3,7 @@ import Modal from "../../components/modal";
 import Header from "../../components/header";
 import CompanyList from "./components/companyList";
 import { Button } from "primereact/button";
-import "../../styles/company.scss";
+import "./styles/company.scss";
 import { InputText } from "primereact/inputtext";
 import { InputMask } from "primereact/inputmask";
 import { useFormik } from "formik";
@@ -74,8 +74,7 @@ const Company = () => {
       <Toast ref={toast} position="top-left" />
       <div className="body">
         <Button
-          className="newCompany"
-          severity="success"
+          className="primary"
           onClick={() => {
             setDisplayBasic(true);
           }}
@@ -181,7 +180,7 @@ const Company = () => {
           <LoadingButton
             loading={loading}
             label={"Salvar"}
-            severity={"success"}
+            severity={"save"}
             form={"createForm"}
           />
         </div>

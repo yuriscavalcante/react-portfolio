@@ -6,8 +6,7 @@ const LoadingButton = ({ loading, label, severity, form }: any) => {
     <Button
       type="submit"
       form={form ? form : null}
-      severity={severity ? severity : "primary"}
-      className="btn btn-info"
+      className={severity ? severity : "primary"}
     >
       {loading ? (
         <ProgressSpinner style={{ width: "25px", height: "25px" }} />
