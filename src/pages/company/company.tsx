@@ -24,14 +24,14 @@ const Company = () => {
       name: "",
       acronym: "",
       cnpj: "",
-      phone: "",
+      phoneNumber: "",
       email: "",
     },
     validationSchema: yup.object({
       name: yup.string().required("Campo requerido"),
       acronym: yup.string(),
       cnpj: yup.string().required("Campo requerido"),
-      phone: yup.string().required("Campo requerido"),
+      phoneNumber: yup.string().required("Campo requerido"),
       email: yup.string().email().required("Campo requerido"),
     }),
     onSubmit: async (values: any, { resetForm }) => {
@@ -43,7 +43,7 @@ const Company = () => {
             name: values.name,
             acronym: values.acronym,
             cnpj: values.cnpj,
-            phoneNumber: values.phone,
+            phoneNumber: values.phoneNumber,
             email: values.email,
           })
           .then((response: any) => {
@@ -209,17 +209,17 @@ const Company = () => {
                 <span className="p-float-label">
                   <InputMask
                     mask="(99)9999-9999"
-                    id="phone"
+                    id="phoneNumber"
                     onChange={formikCompany.handleChange}
                     onBlur={formikCompany.handleBlur}
-                    value={formikCompany.values.phone}
+                    value={formikCompany.values.phoneNumber}
                   />
                   <label htmlFor="lefticon">Telefone</label>
                 </span>
               </div>
-              {formikCompany.touched.phone && formikCompany.errors.phone ? (
+              {formikCompany.touched.phoneNumber && formikCompany.errors.phoneNumber ? (
                 <div>
-                  <a>{String(formikCompany.errors.phone)}</a>
+                  <a>{String(formikCompany.errors.phoneNumber)}</a>
                 </div>
               ) : null}
             </div>

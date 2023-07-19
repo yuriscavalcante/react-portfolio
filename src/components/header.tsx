@@ -1,8 +1,8 @@
+import { Button } from "primereact/button";
+import { Sidebar } from "primereact/sidebar";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/header.scss";
-import { Sidebar } from "primereact/sidebar";
-import { Button } from "primereact/button";
 
 const Header = () => {
   const [visible, setVisible] = useState(false);
