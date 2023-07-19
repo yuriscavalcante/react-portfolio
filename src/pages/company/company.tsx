@@ -88,7 +88,7 @@ const Company = () => {
         displayBasic={displayBasic}
         method={"Adicionar uma empresa"}
       >
-        <div className="teste">
+        <div className="forms">
           <form
             onSubmit={formikCompany.handleSubmit}
             className="form"
