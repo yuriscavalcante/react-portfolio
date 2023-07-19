@@ -10,12 +10,23 @@
 }
 
 .save {
-  background: #17212f !important;
+  background: #2E8B57 !important;
   color: #fff !important;
-  border: 1px solid #17212f !important;
+  border: 1px solid #2E8B57 !important;
 }
 .save:hover {
-  background: #111720 !important;
-  border: 1px solid #111720 !important;
+  background: #006400 !important;
+  border: 1px solid #006400 !important;
+  color: #fff !important;
+}
+
+.danger {
+  background: #8B0000 !important;
+  color: #fff !important;
+  border: 1px solid #8B0000 !important;
+}
+.danger:hover {
+  background: #800020 !important;
+  border: 1px solid #800020 !important;
   color: #fff !important;
 }

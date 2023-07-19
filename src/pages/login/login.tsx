@@ -1,12 +1,12 @@
-import Card from "../../components/card";
-import * as yup from "yup";
 import { useFormik } from "formik";
-import "../../styles/userForms.scss";
-import { useNavigate } from "react-router-dom";
-import api from "../../config/api";
-import { useRef, useState } from "react";
-import LoadingButton from "../../components/loadingButton";
 import { Toast } from "primereact/toast";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import Card from "../../components/card";
+import LoadingButton from "../../components/loadingButton";
+import api from "../../config/api";
+import "../../styles/userForms.scss";
 
 const Login = () => {
   const toast: any = useRef(null);

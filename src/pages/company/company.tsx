@@ -1,21 +1,23 @@
-import { useRef, useState } from "react";
-import Modal from "../../components/modal";
-import Header from "../../components/header";
-import CompanyList from "./components/companyList";
-import { Button } from "primereact/button";
-import "./styles/company.scss";
-import { InputText } from "primereact/inputtext";
-import { InputMask } from "primereact/inputmask";
 import { useFormik } from "formik";
-import * as yup from "yup";
-import LoadingButton from "../../components/loadingButton";
+import { Button } from "primereact/button";
+import { InputMask } from "primereact/inputmask";
+import { InputText } from "primereact/inputtext";
+import { ProgressSpinner } from "primereact/progressspinner";
 import { Toast } from "primereact/toast";
+import { useRef, useState } from "react";
+import * as yup from "yup";
+import Header from "../../components/header";
+import LoadingButton from "../../components/loadingButton";
+import Modal from "../../components/modal";
 import api from "../../config/api";
+import CompanyList from "./components/companyList";
+import "./styles/company.scss";
 
 const Company = () => {
   const [displayBasic, setDisplayBasic] = useState(false);
   const [loading, setLoading] = useState(false);
   const [reload, setReload] = useState(false);
+  const [selectedCompany, setSelectedCompany] = useState<any>();
   const toast: any = useRef(null);
   const formikCompany = useFormik({
     initialValues: {
@@ -68,20 +70,65 @@ const Company = () => {
     setDisplayBasic(display);
   };
 
+  const handleSelectedCompany = (company: any) => {
+    setSelectedCompany(company);
+  };
+
+  const deleteCompanies = async (companies: any) => {
+    setLoading(true);
+    try {
+      setReload(true);
+      for (let c of companies) {
+        await api.delete(`company/${c.id}`).then((response: any) => {
+          return toast.current.show({
+            severity: "success",
+            detail: response.data.message,
+          });
+        });
+      }
+      
+      setLoading(false);
+      setReload(false);
+    } catch (err: any) {
+      setLoading(false);
+      return toast.current.show({
+        severity: "error",
+        detail: err.response.data.message,
+      });
+    }
+  };
+
   return (
     <>
       <Header></Header>
       <Toast ref={toast} position="top-left" />
       <div className="body">
-        <Button
-          className="primary"
-          onClick={() => {
-            setDisplayBasic(true);
-          }}
-        >
-          Adicionar
-        </Button>
-        <CompanyList reload={reload}></CompanyList>
+        <div className="buttons">
+          <Button
+            className="primary"
+            onClick={() => {
+              setDisplayBasic(true);
+            }}
+          >
+            Adicionar
+          </Button>
+          <Button
+            className="danger"
+            onClick={() => {
+              deleteCompanies(selectedCompany);
+            }}
+          >
+            {loading ? (
+              <ProgressSpinner style={{ width: "25px", height: "25px" }} />
+            ) : (
+              "Remover"
+            )}
+          </Button>
+        </div>
+        <CompanyList
+          reload={reload}
+          handleSelectedCompany={handleSelectedCompany}
+        ></CompanyList>
       </div>
       <Modal
         handleChange={handleChange}

@@ -7,6 +7,13 @@
   gap: 25px;
   align-items: end;
   padding: 15px;
+  .buttons {
+    padding: 15px;
+    button {
+      margin: 15px;
+      width: 15vw;
+    }
+  }
   .newCompany {
     display: flex;
     color: white;

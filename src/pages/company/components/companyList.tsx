@@ -1,13 +1,13 @@
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { useEffect, useRef, useState } from "react";
-import MockedData from "../../../service/mockedData";
-import "../styles/list.scss";
 import api from "../../../config/api";
+import "../styles/list.scss";
 
-const CompanyList = ({ reload }: any) => {
+const CompanyList = ({ reload, handleSelectedCompany }: any) => {
   const [loading, setLoading] = useState(false);
   const [companies, setCompanies] = useState([{}]);
+  const [selectedCompany, setSelectedCompany] = useState<any>();
   const toast: any = useRef(null);
   const [lazyParams, setLazyParams] = useState({
     first: 0,
@@ -24,12 +24,10 @@ const CompanyList = ({ reload }: any) => {
   const loadLazy = async (params: any) => {
     setLoading(true);
     try {
-      await api
-        .get(`/company?skip=${lazyParams.first}`)
-        .then((response: any) => {
-          setCompanies(response.data.list);
-          setTotal(response.data.total);
-        });
+      await api.get(`/company?skip=${params.first}`).then((response: any) => {
+        setCompanies(response.data.list);
+        setTotal(response.data.total);
+      });
       setLoading(false);
     } catch (err: any) {
       setLoading(false);
@@ -45,25 +43,31 @@ const CompanyList = ({ reload }: any) => {
     setLazyParams(event);
   };
   return (
-    <div className="list">
-      <DataTable
-        value={companies}
-        lazy
-        dataKey="id"
-        paginator
-        first={lazyParams.first}
-        rows={10}
-        totalRecords={total}
-        onPage={onPage}
-        loading={loading}
-      >
-        <Column field="name" header="Nome"></Column>
-        <Column field="acronym" header="Sigla"></Column>
-        <Column field="cnpj" header="cnpj"></Column>
-        <Column field="phoneNumber" header="Telefone"></Column>
-        <Column field="email" header="E-mail"></Column>
-      </DataTable>
-    </div>
+    <>
+      <div className="list">
+        <DataTable
+          value={companies}
+          lazy
+          dataKey="id"
+          paginator
+          first={lazyParams.first}
+          rows={10}
+          totalRecords={total}
+          onPage={onPage}
+          loading={loading}
+          selectionMode='single'
+          selection={selectedCompany}
+          onSelectionChange={(e) => { if(e.type === "row") {console.log('É row')} else{handleSelectedCompany(e.value)} setSelectedCompany(e.value)}}
+        >
+          <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
+          <Column field="name" header="Nome"></Column>
+          <Column field="acronym" header="Sigla"></Column>
+          <Column field="cnpj" header="cnpj"></Column>
+          <Column field="phoneNumber" header="Telefone"></Column>
+          <Column field="email" header="E-mail"></Column>
+        </DataTable>
+      </div>
+    </>
   );
 };
 

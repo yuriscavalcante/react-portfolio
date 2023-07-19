@@ -1,5 +1,5 @@
-import { ProgressSpinner } from "primereact/progressspinner";
 import { Button } from "primereact/button";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 const LoadingButton = ({ loading, label, severity, form }: any) => {
   return (
