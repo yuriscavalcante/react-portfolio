@@ -74,8 +74,15 @@ const Company = () => {
     setSelectedCompany(company);
   };
 
-  const deleteCompanies = async (companies: any) => {
+  const deleteCompanies = async (companies: Array<any>) => {
     setLoading(true);
+    if (!companies) {
+      setLoading(false);
+      return toast.current.show({
+        severity: "warn",
+        detail: "Selecione pelo menos uma empresa!",
+      });
+    }
     try {
       setReload(true);
       for (let c of companies) {
