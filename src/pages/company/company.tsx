@@ -86,7 +86,7 @@ const Company = () => {
           });
         });
       }
-      
+
       setLoading(false);
       setReload(false);
     } catch (err: any) {
@@ -110,7 +110,7 @@ const Company = () => {
               setDisplayBasic(true);
             }}
           >
-            Adicionar
+            <i className="pi pi-plus" style={{ fontSize: "1.4rem" }}></i>
           </Button>
           <Button
             className="danger"
@@ -121,7 +121,7 @@ const Company = () => {
             {loading ? (
               <ProgressSpinner style={{ width: "25px", height: "25px" }} />
             ) : (
-              "Remover"
+              <i className="pi pi-trash" style={{ fontSize: "1.4rem" }}></i>
             )}
           </Button>
         </div>
@@ -217,7 +217,8 @@ const Company = () => {
                   <label htmlFor="lefticon">Telefone</label>
                 </span>
               </div>
-              {formikCompany.touched.phoneNumber && formikCompany.errors.phoneNumber ? (
+              {formikCompany.touched.phoneNumber &&
+              formikCompany.errors.phoneNumber ? (
                 <div>
                   <a>{String(formikCompany.errors.phoneNumber)}</a>
                 </div>

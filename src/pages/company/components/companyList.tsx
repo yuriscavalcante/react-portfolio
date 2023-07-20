@@ -229,11 +229,11 @@ const CompanyList = ({ reload, handleSelectedCompany }: any) => {
           selection={selectedCompany}
           onRowDoubleClick={(e) => {
             handleDoubleClick(e.data);
-
             handleChange(true);
           }}
           onSelectionChange={(e) => {
             setSelectedCompany(e.value);
+            handleSelectedCompany(e.value);
           }}
         >
           <Column
