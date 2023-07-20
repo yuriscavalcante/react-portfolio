@@ -36,7 +36,6 @@ const Login = () => {
         setLoading(false);
         navigate("/home");
       } catch (err: any) {
-        console.log(err);
         setLoading(false);
         return toast.current.show({
           severity: "error",
