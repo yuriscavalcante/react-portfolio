@@ -4,6 +4,7 @@ import Login from "./pages/login/login";
 import Home from "./pages/home/home";
 import Company from "./pages/company/company";
 import "./styles/buttons.scss";
+import User from "./pages/users/user";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/company" element={<Company />} />
+        <Route path="/users" element={<User />} />
         <Route path="*" element={<Navigate to="/login" replace={true} />} />
       </Routes>
     </BrowserRouter>

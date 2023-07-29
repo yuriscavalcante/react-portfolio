@@ -15,13 +15,13 @@ const Header = () => {
           <div className="buttons">
             {user.user.isAdmin ? (
               <Link to={"/company"}>
-                <Button className="menu-item p-button-text">Empresa</Button>
+                <Button className="menu-item p-button-text">Empresas</Button>
               </Link>
             ) : null}
-            <Link slot="end" to={"/login"}>
-              <Button className="menu-item p-button-text">Passar</Button>
+            <Link to={"/users"}>
+              <Button className="menu-item p-button-text">Usuarios</Button>
             </Link>
-            <Link slot="end" to={"/login"}>
+            <Link to={"/login"}>
               <Button className="menu-item p-button-text">Passar</Button>
             </Link>
           </div>
@@ -31,6 +31,7 @@ const Header = () => {
           className="p-button p-component p-button-text"
           onClick={() => setVisible(true)}
         />
+        <h3>Aqui</h3>
       </div>
     </>
   );

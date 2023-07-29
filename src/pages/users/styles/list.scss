@@ -1,0 +1,33 @@
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .p-datatable {
+    width: 98vw;
+    .p-datatable-wrapper {
+      height: 66vh;
+      border-radius: 8px;
+      .p-datatable-tbody {
+        tr {
+          background: #212a3e !important;
+          border-color: black;
+          border-radius: 8px;
+          td {
+            border: 1px solid #304562;
+          }
+        }
+      }
+      .p-datatable-thead tr > {
+        th {
+          border: 1px solid #304562;
+          background: #212a3e !important;
+        }
+      }
+    }
+    .p-paginator {
+      border-radius: 8px;
+      border: 1px solid #304562;
+      background: #212a3e !important;
+    }
+  }
+}
